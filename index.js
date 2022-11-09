@@ -58,11 +58,21 @@ async function run() {
             res.send(cursor);
         });
         //get review........
+        
         app.get("/review", async (req, res) => {
-            const cursor = await reviewCollection.find();
+            let query = {};
+            if (req.query.serviceID) {
+              query = { serviceID: req.query.serviceID };
+            }
+      
+            const cursor = await reviewCollection.find(query);
             const result = await cursor.toArray();
             res.send(result);
-        });
+          });
+      
+
+
+       
 
 
     }
